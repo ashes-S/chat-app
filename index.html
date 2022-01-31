@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="http://localhost:8000/socket.io/socket.io.js"></script>
+    <script defer src="js/client.js"></script>
     <link rel="stylesheet" href="css/style.css">
     <title>Chat App</title>
 </head>
@@ -15,62 +17,20 @@
 <!-- dark mode -->
 
 
-
 <section class="container">
-
 
     <header class="logo">
         <img src="logo.png" alt="logo">
     </header>
 
     <section class="sec-chatbox">
+        
         <!-- maybe dp of messager on left -->
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side ahha you gay ass fatass retrand shitty human whi 
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side
-        </figure>
-        <figure class="left msg-style">
-            msgs from other side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
-        <figure class="right msg-style">
-            msgs from my side
-        </figure>
+
     </section>
 
     <form action="/" method="post" class="send-msg">
-        <input type="text" name="msg" value="" spellcheck="true">
+        <input class="msgInput" type="text" name="msg" value="" spellcheck="true">
         <button class="btn" type="submit">></button>
     </form>
 

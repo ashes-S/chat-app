@@ -108,7 +108,12 @@ header > img {
   /* border-bottom-right-radius: 10px; */
   border-style: dashed;
 }
-
+.middle{
+  align-self: center;
+  border: 5px double var(--primary-color);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
 
 .send-msg {
   display: flex;
@@ -118,7 +123,7 @@ header > img {
   margin-top: 15px;
   padding-inline: 15px;
 }
-.send-msg > input {
+.msgInput {
   font-size: 1.4rem;
   min-width: 94%;
   font-size: 1.5rem;
@@ -126,7 +131,7 @@ header > img {
   letter-spacing: 2px;
   background-color: rgb(211, 209, 209);
 }
-input[type="text"]:focus {
+.msgInput:focus {
   outline: none;
   border-color: var(--primary-color);
 }
