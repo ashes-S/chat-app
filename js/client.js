@@ -23,13 +23,14 @@ const userStatus = (user_name, status) => {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
-
 //message status (msg/media sent/receive)
 const statusMsg = (msg, nmaewa, status) => {
     if (status == "img") {
         var imageSent = document.createElement("img");
         imageSent.classList.add("imgStyle");
         imageSent.setAttribute("src", msg);
+        // imageSent.setAttribute("onclick", {zoom(msg);}`);
+        imageSent.onclick = ()=>window.open(msg);
     }
     let newMsg = document.createElement("div");
     if (nmaewa == "nothing") {
@@ -43,6 +44,7 @@ const statusMsg = (msg, nmaewa, status) => {
     }
     else if (nmaewa != "nothing") {
         if (status == "img") {
+            newMsg.innerText = `${nmaewa}: \n`;
             newMsg.append(imageSent);
         }
         else {
@@ -104,7 +106,7 @@ socket.on('receive', data => {
     let msg = data.message;
     let nmaewa = data.name;
     let status = "receive";
-    if(data.type=="file"){
+    if (data.type == "file") {
         status = "img";
     }
     statusMsg(msg, nmaewa, status);
@@ -114,13 +116,14 @@ socket.on('receive', data => {
 
 //make it send media files
 document.querySelector(".mediaSend").addEventListener('change', function () {
-    let msg = [];
+    let msg = [2];
     msg[0] = URL.createObjectURL(this.files[0]);
     msg[1] = "file";
     let nmaewa = "nothing";
     let status = "img";
+
+    //run another function to show a small img at txt field
     statusMsg(msg[0], nmaewa, status);
     socket.emit('send', msg);
     chatbox.scrollTop = chatbox.scrollHeight;
 })
-
