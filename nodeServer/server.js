@@ -1,5 +1,7 @@
 //server which handles socket.io connections
 
+const { Server } = require('socket.io');
+
 const io = require('socket.io')(8000, {
   cors: {
     origin: '*',
@@ -17,6 +19,11 @@ io.on('connection', socket => {
 
   socket.on('send', message => {
     socket.broadcast.emit('receive', { message: message, name: user[socket.id] })
+  })
+
+  socket.on('disconnect', message => {
+    socket.broadcast.emit('user-left', user[socket.id]);
+    delete user[socket.id];
   })
 
 })
