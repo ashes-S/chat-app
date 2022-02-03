@@ -18,7 +18,6 @@ io.on('connection', socket => {
   })
 
   socket.on('send', message => {
-    console.log(message[1]);
     socket.broadcast.emit('receive', { message: message[0], name: user[socket.id], type: message[1] })
   })
 

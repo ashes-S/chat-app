@@ -1,5 +1,6 @@
 const socket = io('http://localhost:8000');
 
+$ = document.querySelector.bind(document)
 const form = document.getElementsByClassName("send-msg")[0];
 const msgInput = document.getElementsByClassName("msgInput")[0];
 const chatbox = document.getElementsByClassName("sec-chatbox")[0];
@@ -23,40 +24,71 @@ const userStatus = (user_name, status) => {
     chatbox.scrollTop = chatbox.scrollHeight;
 }
 
+
 //message status (msg/media sent/receive)
 const statusMsg = (msg, nmaewa, status) => {
-    if (status == "img") {
-        var imageSent = document.createElement("img");
-        imageSent.classList.add("imgStyle");
-        imageSent.setAttribute("src", msg);
-        // imageSent.setAttribute("onclick", {zoom(msg);}`);
-        imageSent.onclick = ()=>window.open(msg);
+
+    //conditions for file being sent/received
+    if (status == "img" || status == "audio" || status == "video" || status == "doc") {
+
+        var obj = {}
+
+        if (status == "doc") {
+            obj[status + "Sent"] = document.createElement("iframe");
+        }
+        else {
+            obj[status + "Sent"] = document.createElement(status);
+        }
+
+        obj[status + "Sent"].classList.add(status + "Style");
+        obj[status + "Sent"].setAttribute("src", msg);
+
+        if (status == "audio" || status == "video") {
+            obj[status + "Sent"].setAttribute('controls', true);
+            if (status == "video") {
+                obj[status + "Sent"].onclick = () => window.open(msg);
+            }
+            else {
+                obj[status + "Sent"].setAttribute('loop', true);
+                obj[status + "Sent"].setAttribute('autoplay', true);
+            }
+        }
+        else if (status == "img") {
+            obj[status + "Sent"].onclick = () => window.open(msg);
+        }
     }
+
     let newMsg = document.createElement("div");
+
     if (nmaewa == "nothing") {
-        if (status == "img") {
-            newMsg.append(imageSent);
+        //send conditions
+        if (status == "img" || status == "audio" || status == "video" || status == "doc") {
+            newMsg.append(obj[status + "Sent"]);
         }
         else {
             newMsg.innerText = `${msg}`;
         }
         var pos = "right"
     }
+
     else if (nmaewa != "nothing") {
-        if (status == "img") {
+        //receiving conditions
+        if (status == "img" || status == "audio" || status == "video" || status == "doc") {
             newMsg.innerText = `${nmaewa}: \n`;
-            newMsg.append(imageSent);
+            newMsg.append(obj[status + "Sent"]);
         }
         else {
             newMsg.innerText = `${nmaewa}: \n ${msg}`;
         }
         var pos = "left"
     }
+
     newMsg.classList.add(pos, "msg-style");
     chatbox.append(newMsg);
     chatbox.scrollTop = chatbox.scrollHeight;
     msgTone.play();
 }
+
 
 
 
@@ -68,6 +100,7 @@ if (user_name != "") {
     socket.emit('new-user-joined', user_name);
 }
 ////
+
 
 
 
@@ -105,25 +138,45 @@ form.addEventListener("submit", (e) => {
 socket.on('receive', data => {
     let msg = data.message;
     let nmaewa = data.name;
-    let status = "receive";
-    if (data.type == "file") {
-        status = "img";
-    }
+    let status = data.type;
     statusMsg(msg, nmaewa, status);
 })
 
 
 
 //make it send media files
-document.querySelector(".mediaSend").addEventListener('change', function () {
+document.querySelector(".mediaAttach").addEventListener('change', function () {
+    //take file then trim extension at the end then call function related to file type
     let msg = [2];
     msg[0] = URL.createObjectURL(this.files[0]);
-    msg[1] = "file";
     let nmaewa = "nothing";
-    let status = "img";
+
+    let ext = (this.files[0].name).split(".");
+    ext = (ext[ext.length - 1]).toLowerCase();
+
+    // if extension is one of img - run this cmnd
+    let status;
+
+    if (ext === "png" || ext === "jpeg" || ext === "jpg" || ext === "webp" || ext === "gif") {
+        status = "img";
+        msg[1] = "img";
+    }
+    else if (ext == "mp3" || ext == "wav" || ext == "wma" || ext == "aac") {
+        status = "audio";
+        msg[1] = "audio";
+    }
+    else if (ext == "mp4" || ext == "avi" || ext == "mkv" || ext == "webm" || ext == "flv" || ext == "amv" || ext == "mpg") {
+        status = "video";
+        msg[1] = "video";
+    }
+    else if (ext == "pdf" || ext == "doc" || ext == "docx" || ext == "txt") {
+        status = "doc";
+        msg[1] = "doc";
+    }
 
     //run another function to show a small img at txt field
     statusMsg(msg[0], nmaewa, status);
     socket.emit('send', msg);
-    chatbox.scrollTop = chatbox.scrollHeight;
+    chatbox.lastChild.scrollIntoView();
 })
+

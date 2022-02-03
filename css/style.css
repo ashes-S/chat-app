@@ -90,7 +90,7 @@ header > img {
   background-color: black;
   border: 2px solid var(--primary-color);
   max-width: 50%;
-  font-size: 1.26rem;
+  font-size: 1.5rem;
   padding: 3px 6px;
   margin-inline: 0;
   margin-block: 10px;
@@ -134,7 +134,7 @@ header > img {
 }
 .msgInput {
   font-size: 1.4rem;
-  min-width: 94%;
+  min-width: 88%;
   font-size: 1.5rem;
   padding: 10px;
   letter-spacing: 2px;
@@ -145,23 +145,47 @@ header > img {
   border-color: var(--primary-color);
 }
 
+
 .btn {
   width: 55px;
-  min-width: 45px;
+  min-width: 50px;
   border: none;
   background-color: var(--primary-color);
-  border-radius: 25px;
+  border-radius: 30px;
   font-size: 1.7rem;
   cursor: pointer;
   font-weight: bolder;
   font-family: Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  aspect-ratio: 1/1;
 }
 
+.mediaSend{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(30deg);
+  border-radius: 30px;
+}
+.mediaAttach{
+  display: none;
+}
 
-.imgStyle{
+.imgStyle, .videoStyle{
   width: 100%;
   height: 92%;
 }
+.docStyle{
+    width: 95%;
+}
+iframe{
+  background-color: white;
+}
+
+
+
+
+
+
 
 /* media screen 450px */
   /* min-width: fit-content; */
