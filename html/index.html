@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="http://localhost:8000/socket.io/socket.io.js"></script>
-    <script defer src="js/client.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <script defer src="client.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Chat App</title>
 </head>
 
@@ -30,11 +30,13 @@
 
         <form action="/" method="post" class="send-msg">
             <input class="msgInput" type="text" name="msg" value="" spellcheck="true" required autofocus>
-            <label class="mediaSend btn">📎
-                <input type="file" class="mediaAttach" multiple
-                accept=".mp4,.avi,.mkv,.webm,.flv,.amv,.mpg,.pdf,.doc,.docx,.txt,.mp3,.wav,.wma,.aac,.png,.jpeg,.jpg,.webp,.gif">
-            </label>
-            <button class="btn" type="submit">></button>
+            <div class="btnCont">
+                <label class="mediaSend btn">📎
+                    <input type="file" class="mediaAttach" multiple
+                        accept=".mp4,.avi,.mkv,.webm,.flv,.amv,.mpg,.pdf,.doc,.docx,.txt,.mp3,.wav,.wma,.aac,.png,.jpeg,.jpg,.webp,.gif">
+                </label>
+                <button class="btn" type="submit">></button>
+            </div>
         </form>
     </section>
 

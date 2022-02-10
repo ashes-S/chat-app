@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+*::selection {
+  color: black;
+  background-color: var(--primary-color);
+}
+
 html,
 body {
   margin: 0;
@@ -14,10 +19,6 @@ body {
   overflow: hidden;
 }
 
-*::selection {
-  color: black;
-  background-color: var(--primary-color);
-}
 
 body {
   display: flex;
@@ -52,14 +53,18 @@ header {
   background-color: transparent;
   background-image: linear-gradient(
     to right,
-    transparent 45%,
+    transparent 5%,
     var(--primary-color) 50%,
-    transparent 55%
+    transparent 95%
   );
   user-select: none;
+  width: 10%;
+  min-width: 80px;
+  align-self: center;
 }
 header > img {
-  width: 5%;
+  height: 6.5vh;
+  min-height: 45px;
   aspect-ratio: 1.2/1;
 }
 
@@ -128,13 +133,14 @@ header > img {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 1%;
+  gap: 2%;
   margin-top: 15px;
   padding-inline: 15px;
 }
 .msgInput {
   font-size: 1.4rem;
-  min-width: 88%;
+  min-width: 160px;
+  width: 88%;
   font-size: 1.5rem;
   padding: 10px;
   letter-spacing: 2px;
@@ -145,9 +151,14 @@ header > img {
   border-color: var(--primary-color);
 }
 
-
+.btnCont{
+  width: 5%;
+  min-width: 110px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
 .btn {
-  width: 55px;
   min-width: 50px;
   border: none;
   background-color: var(--primary-color);
@@ -170,6 +181,7 @@ header > img {
   display: none;
 }
 
+
 .imgStyle, .videoStyle{
   width: 100%;
   height: 92%;
@@ -182,10 +194,23 @@ iframe{
 }
 
 
+/* media queries at 545px */
 
+/* 
+@media screen and (max-width: 80px) {
+    body{
+      height: 95vh;
+      padding-top: 2.3vh;
+      padding-bottom: 1.3vh;
+    }
+    header>img{
+      width: 20%;
 
-
-
-
-/* media screen 450px */
-  /* min-width: fit-content; */
+    }
+    .container{
+      width: 96%;
+    }
+    .msgInput{
+      min-width: 64%;
+    }
+} */

@@ -94,7 +94,14 @@ const statusMsg = (msg, nmaewa, status) => {
 
 //new page for this? maybe//
 //cannot be emptied//
-let user_name = prompt("enter your name - ");
+var user_name, user_password;
+
+subBtn = () => {
+    user_name = document.querySelector(".nameInp").value;
+    user_password = document.querySelector(".passInp").value;
+}
+
+//maX length on input
 
 if (user_name != "") {
     socket.emit('new-user-joined', user_name);
