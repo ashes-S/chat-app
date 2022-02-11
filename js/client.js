@@ -1,4 +1,3 @@
-// http:localhost: replace with domain
 // https://yourAppName-app.herokuapp.com/
 const socket = io('http://localhost:8000');
 
