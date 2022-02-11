@@ -12,6 +12,7 @@ app.use(express.static(__dirname + '/../js'));
 
 
 var PORT = process.env.PORT || 8000;
+var uname, upass;
 
 app.get("/", (req, res) => {
 	res.sendFile(path.resolve(__dirname + "/../html/login.html"));
@@ -19,11 +20,13 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
 	res.sendFile(path.resolve(__dirname + "/../html/index.html"))
+	uname = req.body.name;
+	upass = req.body.password;
 })
 
 
 var server = app.listen(PORT, () => 
-	console.log("server started on port 8000")
+	console.log(`server started on port ${PORT}`)
 );
 
 
@@ -40,7 +43,7 @@ const user = {}
 io.on('connection', socket => {
 	socket.on('new-user-joined', user_name => {
 		//string inside object user
-		user[socket.id] = user_name;
+		user[socket.id] = uname;
 		socket.broadcast.emit('user-joined', user_name);
 	})
 
